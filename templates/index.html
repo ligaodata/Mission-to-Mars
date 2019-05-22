@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Mars!</title>
+    <style>
+        img {max-width: 100%;}
+        #news {
+            border-style: solid;
+            border-width: 3px 0px 3px 0px;
+            border-color: gray;
+            padding:  15px;
+        }
+        .weather {
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 3px;
+            border-color: gray;
+            padding: 14px;
+        }
+        .endit p {
+            padding: 0px;
+            margin: 0px;
+        }
+        #credit {margin-left: 120px;}
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>Mission To Mars</h1>
+            <a class="btn btn-primary btn-lg" href="/scrape" role="button" >Get New Data</a>
+        </div>
+    </div>
+
+    <br><hr><br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="news">
+                    <h2>Latest Mars News</h2>
+                    <h5>{{ mars_data.news_title }}</h5>
+                    <p>{{ mars_data.news_para }}</p>
+                </div>
+            </div>
+        </row>
+
+        <div class="row">
+            <div class="col-md-8">
+                <br>
+                <h2>Featured Image</h2>
+                <img src="{{ mars_data.featured_image_url }}" width=600px alt="Featured Image">
+            </div>
+            <div class="col-md-4">
+                <br><br>
+                <div class="weather">
+                    <h4>Current Weather on Mars</h4>
+                    <p>{{ mars_data.weather_report }}</p>
+                </div>
+
+                <br><br>
+                <h4>Mars_Facts</h4>
+                {{ mars_data.mars_facts_html|safe }}
+                <br><br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Mars Hemispheres</h2>
+            </div>
+        </div>
+
+        <div class="row">
+                {% for hemi in mars_data.hemisphere_list %}
+                    <div class="col-md-6">
+                        <img src="{{ hemi['img_url'] }}" height=440px alt="Hemisphere">
+                        <h4>{{ hemi['title'] }}</h4>
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
+
+    </div>
+
+    
+   
+</body>
+
+</html>
